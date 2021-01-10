@@ -58,22 +58,23 @@ def fetch(ticker) :
 def make_figure(data, data2):
     p=figure(x_axis_type="datetime", width=400, height=300)
     if request.form.get('Close'):
-        p.line(x=data['date'].values, y=data['4. close'].values,line_width=2, legend='Close')
+        p.line(x=data['date'].values, y=data['4. close'].values,line_width=1.8, legend='Close')
     if request.form.get('Adj. Close'):
-        p.line(x=data2['date'].values, y=data2['5. adjusted close'].values,line_width=2, line_color="green", legend='Adj. Close')
+        p.line(x=data2['date'].values, y=data2['5. adjusted close'].values,line_width=1.8, line_color="orange", legend='Adj. Close')
     if request.form.get('Open'):
-        p.line(x=data['date'].values, y=data['1. open'].values,line_width=2, line_color="red", legend='Open')
+        p.line(x=data['date'].values, y=data['1. open'].values,line_width=1.8, line_color="black", legend='Open')
     if request.form.get('Adj. Open'):
-        p.line(x=data2['date'].values, y=data2['1. open'].values,line_width=2, line_color="purple", legend='Adj. Open')
+        p.line(x=data2['date'].values, y=data2['1. open'].values,line_width=1.8, line_color="blue", legend='Adj. Open')
     
     
-    
+    p.xaxis.axis_label = 'Date'
+    p.yaxis.axis_label = 'Price'
 
 
 
     p.grid.grid_line_alpha=0.3
-    p.xaxis.axis_label = 'Date'
-    p.yaxis.axis_label = 'Price'
+    
+
     output_file('templates/plot.html')
     save(p)
     script, div=components(p)
